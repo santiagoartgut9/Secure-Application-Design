@@ -37,7 +37,23 @@ La aplicación fue desplegada en una infraestructura productiva con certificados
 ---
 
 ## 📝 Descripción
-Aplicación demo con backend REST en Spring Boot que proporciona endpoints de autenticación (registro/login) y APIs protegidas por JWT. Apache funciona como frontal con TLS (Let's Encrypt) y proxy hacia la app que escucha en `127.0.0.1:8080`.
+El sistema permite el registro, autenticación y acceso seguro de usuarios mediante una API REST implementada con Spring Boot.
+El frontend HTML/JavaScript es servido por Apache sobre HTTPS, el cual redirige y enruta las solicitudes /api/* al backend que corre en la misma instancia sobre localhost:8080.
+
+Durante la autenticación, las credenciales son validadas y las contraseñas son cifradas con BCryptPasswordEncoder antes de ser almacenadas.
+Al iniciar sesión, se genera un token JWT que el cliente utiliza en cada petición posterior, garantizando sesiones seguras sin exponer credenciales.
+
+El despliegue en AWS utiliza una configuración con:
+
+Apache 2.4 con certificados SSL/TLS de Let’s Encrypt.
+
+Spring Boot App ejecutándose como servicio systemd (demo.service).
+
+Reverse Proxy con ProxyPass y ProxyPassReverse entre Apache y el backend.
+
+Cabeceras de seguridad activas: HSTS, CSP, X-Frame-Options, X-Content-Type-Options, Referrer-Policy.
+
+Certificados ECDSA válidos hasta 2026, con renovación automática mediante certbot.
 
 ---
 
