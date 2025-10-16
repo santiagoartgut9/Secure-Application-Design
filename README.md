@@ -1,3 +1,13 @@
+
+![Java](https://img.shields.io/badge/Java-21-orange)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.3.2-brightgreen)
+![Apache](https://img.shields.io/badge/Apache-2.4-red)
+![AWS EC2](https://img.shields.io/badge/AWS-EC2-yellow)
+![Let's Encrypt](https://img.shields.io/badge/TLS-Let%27s%20Encrypt-blue)
+![JWT](https://img.shields.io/badge/Auth-JWT-green)
+![BCrypt](https://img.shields.io/badge/Encryption-BCrypt-lightgrey)
+![License](https://img.shields.io/badge/License-MIT-blue)
+
 ## 📂 Project Structure
 
 
@@ -119,6 +129,27 @@ Browser receives JWT -> store (localStorage) -> calls protected APIs
 Apache proxies /api -> JwtFilter in Spring validates token and sets SecurityContext
 
 ```
+
+🧪 Endpoints principales
+
+| Método | Endpoint             | Descripción                           | Autenticación |
+| :----- | :------------------- | :------------------------------------ | :------------ |
+| `POST` | `/api/auth/register` | Registra nuevo usuario (BCrypt hash)  | ❌             |
+| `POST` | `/api/auth/login`    | Retorna token JWT válido              | ❌             |
+| `GET`  | `/api/hello`         | Prueba token JWT (“Hello {username}”) | ✅             |
+
+
+📊 Seguridad y Certificación
+
+| Componente              | Validación                                           |
+| ----------------------- | ---------------------------------------------------- |
+| **Certificado SSL**     | Emitido por Let’s Encrypt, válido hasta *2026-01-13* |
+| **Cifrado HTTPS**       | TLSv1.3 con `TLS_AES_256_GCM_SHA384`                 |
+| **Password Storage**    | Hash mediante `BCryptPasswordEncoder`                |
+| **Autenticación**       | JWT firmado con secreto (`APP_JWT_SECRET`)           |
+| **Protecciones Apache** | HSTS, CSP, X-Frame-Options, Referrer-Policy          |
+| **Puertos abiertos**    | 22 (SSH limitado), 80/443 (públicos), 8080 (privado) |
+
 
 Implementación (específica para tu proyecto)
 Prerrequisitos
@@ -276,5 +307,68 @@ vhost HTTPS
 ```
 
 Recargar apache:
+```
+sudo systemctl reload apache2
+sudo apache2ctl -S
+sudo apache2ctl configtest
+
+```
+
+
+Asegurar red: cerrar puerto 8080
+
+En AWS Console → EC2 → Security Groups (launch-wizard-1), revoca cualquier regla que abra 8080 a 0.0.0.0/0.
+
+Deja 80 y 443 abiertos públicamente.
+
+SSH (22) solo a tu IP
+
+```
+# 8080 debe fallar (si está cerrado)
+curl -v http://3.140.247.200:8080/ || echo "Puerto 8080 no accesible desde internet"
+# HTTP -> debe redirigir a HTTPS
+curl -v http://3.140.247.200.nip.io/
+# HTTPS -> debe servir tu app estática
+curl -vk https://3.140.247.200.nip.io/
+```
+
+<img width="1055" height="519" alt="image" src="https://github.com/user-attachments/assets/203fb0b9-6fa8-40cd-8ed8-dda7f852481e" />
+
+<img width="551" height="483" alt="image" src="https://github.com/user-attachments/assets/5f46c384-d57e-45fc-85c5-15a98bd776e9" />
+
+Logs y evidencia
+```
+# Certificado
+sudo certbot certificates
+sudo certbot renew --dry-run
+
+# Apache & vhosts
+sudo apache2ctl -S
+sudo apache2ctl configtest
+sudo systemctl status apache2 --no-pager
+
+# Cabeceras de seguridad
+curl -sI https://3.140.247.200.nip.io | egrep -i "Strict-Transport-Security|Content-Security-Policy|X-Frame-Options|X-Content-Type-Options|Referrer-Policy"
+
+# Registro / Login / Hello
+curl -v -H "Content-Type: application/json" -d '{"username":"santiago","password":"Pass1234"}' https://3.140.247.200.nip.io/api/auth/register
+curl -v -H "Content-Type: application/json" -d '{"username":"santiago","password":"Pass1234"}' https://3.140.247.200.nip.io/api/auth/login
+# token -> llamar hello
+curl -v -H "Authorization: Bearer $TOKEN" https://3.140.247.200.nip.io/api/hello
+
+# Logs
+sudo journalctl -u demo.service -n 200 --no-pager
+sudo tail -n 200 /var/log/apache2/error.log
+sudo tail -n 200 /var/log/apache2/access.log
+```
+
+
+
+
+
+
+
+
+
 
 
