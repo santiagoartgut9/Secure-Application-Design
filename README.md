@@ -36,6 +36,18 @@ Aplicación demo con backend REST en Spring Boot que proporciona endpoints de au
 
 ---
 
+<p align="center">
+  <a href="https://youtu.be/l9sY3qlHFZg" target="_blank" rel="noopener">
+    <img src="https://img.youtube.com/vi/l9sY3qlHFZg/maxresdefault.jpg"
+         alt="Demo video - Ver en YouTube"
+         width="900"
+         style="max-width:100%;height:auto;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,0.15);" />
+  </a>
+  <br/>
+  <sub><b>▶ Ver demo en YouTube</b></sub>
+</p>
+
+
 ## 📂 Estructura del proyecto
 
 ```text
@@ -178,12 +190,20 @@ Apache proxies /api -> JwtFilter in Spring validates token and sets SecurityCont
 
 
 Implementación (específica para tu proyecto)
-Prerrequisitos
 
-Java 17+ / 21 (tú usaste Java 21)
+⚙️ Prerrequisitos
+
+Java 21+ (JDK/JRE)
 
 Maven 3.6+
 
+Git
+
+Cuenta AWS con permisos EC2
+
+Cliente SSH / clave .pem
+
+En instancias: apache2, certbot (snap), openjdk
 Git
 
 Cuenta AWS con permisos para EC2 / Security Groups
