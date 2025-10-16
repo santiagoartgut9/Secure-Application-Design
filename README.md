@@ -77,7 +77,7 @@ Aplicación demo con backend REST en Spring Boot que proporciona endpoints de au
 
 
 ```
-##🧪 Endpoints principales
+## 🧪 Endpoints principales
 
 | Método | Endpoint             | Descripción                           | Autenticación |
 | :----- | :------------------- | :------------------------------------ | :------------ |
@@ -86,7 +86,7 @@ Aplicación demo con backend REST en Spring Boot que proporciona endpoints de au
 | `GET`  | `/api/hello`         | Prueba token JWT (“Hello {username}”) | ✅             |
 
 
-##📊 Seguridad y Certificación
+## 📊 Seguridad y Certificación
 
 | Componente              | Validación                                           |
 | ----------------------- | ---------------------------------------------------- |
