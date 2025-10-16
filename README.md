@@ -8,6 +8,86 @@
 ![BCrypt](https://img.shields.io/badge/Encryption-BCrypt-lightgrey)
 ![License](https://img.shields.io/badge/License-MIT-blue)
 
+# 🚀 Proyecto Spring Boot + Apache + AWS EC2
+
+**Resumen rápido:** Aplicación Spring Boot (Java 21) desplegada en EC2. Apache actúa como reverse-proxy y sirve front estático; TLS con Let's Encrypt; autenticación con JWT; contraseñas con BCrypt.
+
+---
+
+## 📋 Tabla de contenidos
+- [Descripción](#📝-descripción)
+- [Estructura del proyecto](#📂-estructura-del-proyecto)
+- [Arquitectura](#🏗️-arquitectura)
+- [Flujo de datos](#🔁-flujo-de-datos)
+- [Endpoints principales](#🧪-endpoints-principales)
+- [Seguridad y certificación](#🔐-seguridad-y-certificación)
+- [Prerrequisitos](#⚙️-prerrequisitos)
+- [Ejecución local](#💻-ejecución-local)
+- [Despliegue en EC2 (resumen y comandos)](#☁️-despliegue-en-ec2)
+- [Apache vhost (HTTPS) — ejemplo de configuración](#📡-apache-vhost-https)
+- [Comandos de verificación / logs](#📜-comandos-de-verificación)
+- [Screenshots & evidencia](#🖼️-screenshots--evidencia)
+- [Licencia y autor](#📄-licencia-y-autor)
+
+---
+
+## 📝 Descripción
+Aplicación demo con backend REST en Spring Boot que proporciona endpoints de autenticación (registro/login) y APIs protegidas por JWT. Apache funciona como frontal con TLS (Let's Encrypt) y proxy hacia la app que escucha en `127.0.0.1:8080`.
+
+---
+
+## 📂 Estructura del proyecto
+
+```text
+.
+│   .gitignore
+│   pom.xml
+│   README.md
+│
+├───src
+│   ├───main
+│   │   ├───java
+│   │   │   └───edu
+│   │   │       └───escuelaing
+│   │   │           └───app
+│   │   │               │   App.java
+│   │   │               │
+│   │   │               ├───example
+│   │   │               │       GreetingController.java
+│   │   │               │       HelloController.java
+│   │   │               │
+│   │   │               └───framework
+│   │   │                       Dispatcher.java
+│   │   │                       GetMapping.java
+│   │   │                       MicroSpringBoot.java
+│   │   │                       Request.java
+│   │   │                       RequestParam.java
+│   │   │                       RestController.java
+│   │   │                       SimpleHttpServer.java
+│   │   │                       WebApp.java
+│   │   └───resources
+│   │       └───public
+│   │           │   index.html
+│   │           │   styles.css
+│   │           │   app.js
+│   │           └───images/
+│   │                   LOGO.png
+│   │                   LOGO2.jpg
+│   │                   header-logoescuela.jpg
+
+
+```
+
+
+![Java](https://img.shields.io/badge/Java-21-orange)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.3.2-brightgreen)
+![Apache](https://img.shields.io/badge/Apache-2.4-red)
+![AWS EC2](https://img.shields.io/badge/AWS-EC2-yellow)
+![Let's Encrypt](https://img.shields.io/badge/TLS-Let%27s%20Encrypt-blue)
+![JWT](https://img.shields.io/badge/Auth-JWT-green)
+![BCrypt](https://img.shields.io/badge/Encryption-BCrypt-lightgrey)
+![License](https://img.shields.io/badge/License-MIT-blue)
+
 ## 📂 Project Structure
 
 
