@@ -56,7 +56,7 @@ Cabeceras de seguridad activas: HSTS, CSP, X-Frame-Options, X-Content-Type-Optio
 Certificados ECDSA válidos hasta 2026, con renovación automática mediante certbot.
 
 ---
-
+## ▶ VIDEO
 <p align="center">
   <a href="https://youtu.be/l9sY3qlHFZg" target="_blank" rel="noopener">
     <img src="https://img.youtube.com/vi/l9sY3qlHFZg/maxresdefault.jpg"
