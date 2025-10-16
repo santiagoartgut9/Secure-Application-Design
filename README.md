@@ -77,6 +77,25 @@ Aplicación demo con backend REST en Spring Boot que proporciona endpoints de au
 
 
 ```
+🧪 Endpoints principales
+
+| Método | Endpoint             | Descripción                           | Autenticación |
+| :----- | :------------------- | :------------------------------------ | :------------ |
+| `POST` | `/api/auth/register` | Registra nuevo usuario (BCrypt hash)  | ❌             |
+| `POST` | `/api/auth/login`    | Retorna token JWT válido              | ❌             |
+| `GET`  | `/api/hello`         | Prueba token JWT (“Hello {username}”) | ✅             |
+
+
+📊 Seguridad y Certificación
+
+| Componente              | Validación                                           |
+| ----------------------- | ---------------------------------------------------- |
+| **Certificado SSL**     | Emitido por Let’s Encrypt, válido hasta *2026-01-13* |
+| **Cifrado HTTPS**       | TLSv1.3 con `TLS_AES_256_GCM_SHA384`                 |
+| **Password Storage**    | Hash mediante `BCryptPasswordEncoder`                |
+| **Autenticación**       | JWT firmado con secreto (`APP_JWT_SECRET`)           |
+| **Protecciones Apache** | HSTS, CSP, X-Frame-Options, Referrer-Policy          |
+| **Puertos abiertos**    | 22 (SSH limitado), 80/443 (públicos), 8080 (privado) |
 
 
 Arquitectura
@@ -156,25 +175,6 @@ Apache proxies /api -> JwtFilter in Spring validates token and sets SecurityCont
 
 ```
 
-🧪 Endpoints principales
-
-| Método | Endpoint             | Descripción                           | Autenticación |
-| :----- | :------------------- | :------------------------------------ | :------------ |
-| `POST` | `/api/auth/register` | Registra nuevo usuario (BCrypt hash)  | ❌             |
-| `POST` | `/api/auth/login`    | Retorna token JWT válido              | ❌             |
-| `GET`  | `/api/hello`         | Prueba token JWT (“Hello {username}”) | ✅             |
-
-
-📊 Seguridad y Certificación
-
-| Componente              | Validación                                           |
-| ----------------------- | ---------------------------------------------------- |
-| **Certificado SSL**     | Emitido por Let’s Encrypt, válido hasta *2026-01-13* |
-| **Cifrado HTTPS**       | TLSv1.3 con `TLS_AES_256_GCM_SHA384`                 |
-| **Password Storage**    | Hash mediante `BCryptPasswordEncoder`                |
-| **Autenticación**       | JWT firmado con secreto (`APP_JWT_SECRET`)           |
-| **Protecciones Apache** | HSTS, CSP, X-Frame-Options, Referrer-Policy          |
-| **Puertos abiertos**    | 22 (SSH limitado), 80/443 (públicos), 8080 (privado) |
 
 
 Implementación (específica para tu proyecto)
