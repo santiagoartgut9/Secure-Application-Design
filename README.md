@@ -231,11 +231,50 @@ sudo snap install --classic certbot
 sudo ln -s /snap/bin/certbot /usr/bin/certbot
 
 # pedir certificado (reemplaza dominio nip.io con tu IP)
+```
 sudo certbot --apache -d 3.140.247.200.nip.io
 ```
 vhost HTTPS
 
 <img width="743" height="576" alt="image" src="https://github.com/user-attachments/assets/3b8a3950-d8b1-494f-9fea-db44e1af9dc2" />
 
+vhost HTTPS
+
+<img width="779" height="569" alt="image" src="https://github.com/user-attachments/assets/e96b9db6-632e-4474-8d01-fdb84ed4440e" />
+
+
+```
+<IfModule mod_ssl.c>
+<VirtualHost *:443>
+    ServerName 3.140.247.200.nip.io
+    ServerAlias www.3.140.247.200.nip.io
+
+    DocumentRoot /opt/demo/static
+    <Directory /opt/demo/static>
+        Require all granted
+        Options -Indexes
+    </Directory>
+
+    SSLProxyEngine On
+    ProxyPreserveHost On
+    ProxyPass /api http://127.0.0.1:8080/api
+    ProxyPassReverse /api http://127.0.0.1:8080/api
+
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "DENY"
+    Header always set Referrer-Policy "no-referrer"
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self';"
+
+    SSLCertificateFile /etc/letsencrypt/live/3.140.247.200.nip.io/fullchain.pem
+    SSLCertificateKeyFile /etc/letsencrypt/live/3.140.247.200.nip.io/privkey.pem
+    Include /etc/letsencrypt/options-ssl-apache.conf
+    ErrorLog ${APACHE_LOG_DIR}/arep-ssl-error.log
+    CustomLog ${APACHE_LOG_DIR}/arep-ssl-access.log combined
+</VirtualHost>
+</IfModule>
+```
+
+Recargar apache:
 
 
