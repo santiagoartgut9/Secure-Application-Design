@@ -8,7 +8,7 @@
 ![BCrypt](https://img.shields.io/badge/Encryption-BCrypt-lightgrey)
 ![License](https://img.shields.io/badge/License-MIT-blue)
 
-# 🚀 Proyecto Spring Boot + Apache + AWS EC2
+# 🚀 Secure-Application-Design Spring + Apache + AWS EC2
 
 Este proyecto implementa un sistema seguro de autenticación y gestión de usuarios desarrollado con Spring Boot 3 y desplegado en AWS EC2 utilizando Apache HTTP Server como reverse proxy y terminador de conexión HTTPS (TLS).
 Su objetivo es demostrar una arquitectura moderna de dos capas —frontend estático y backend RESTful— bajo estándares de seguridad actuales, incluyendo cifrado de contraseñas con BCrypt, tokens JWT para autenticación y cabeceras de protección HTTP (HSTS, CSP, X-Frame-Options, etc.) configuradas desde Apache.
