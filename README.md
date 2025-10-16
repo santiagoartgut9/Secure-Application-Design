@@ -10,7 +10,10 @@
 
 # 🚀 Proyecto Spring Boot + Apache + AWS EC2
 
-**Resumen rápido:** Aplicación Spring Boot (Java 21) desplegada en EC2. Apache actúa como reverse-proxy y sirve front estático; TLS con Let's Encrypt; autenticación con JWT; contraseñas con BCrypt.
+Este proyecto implementa un sistema seguro de autenticación y gestión de usuarios desarrollado con Spring Boot 3 y desplegado en AWS EC2 utilizando Apache HTTP Server como reverse proxy y terminador de conexión HTTPS (TLS).
+Su objetivo es demostrar una arquitectura moderna de dos capas —frontend estático y backend RESTful— bajo estándares de seguridad actuales, incluyendo cifrado de contraseñas con BCrypt, tokens JWT para autenticación y cabeceras de protección HTTP (HSTS, CSP, X-Frame-Options, etc.) configuradas desde Apache.
+
+La aplicación fue desplegada en una infraestructura productiva con certificados válidos de Let’s Encrypt, comunicación segura end-to-end y renovación automática de certificados, asegurando la confidencialidad y la integridad de los datos transmitidos.
 
 ---
 
