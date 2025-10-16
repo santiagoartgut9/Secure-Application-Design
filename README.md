@@ -79,8 +79,6 @@ Aplicación demo con backend REST en Spring Boot que proporciona endpoints de au
 ```
 
 
-
-```
 Arquitectura
 
 Desarrollo Local
